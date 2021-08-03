@@ -1,7 +1,14 @@
 import http from "../http-common";
+import Cookies from 'universal-cookie';
 
 const getAll = () => {
-    return http.get("/talentMaterials");
+    const cookies = new Cookies();
+    const auth = cookies.get('auth');
+    return http.get("/talentMaterials", {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    });
 }
 
 export default {

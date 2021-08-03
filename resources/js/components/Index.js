@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
 
 import Register from "./Register";
@@ -12,12 +12,12 @@ function Index() {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <Router>
+                <Switch>
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/home" component={Home} />
                     <Route path="/characters" component={CharacterContainer} />
-                </Router>
+                </Switch>
                 <div className="col-md-8">
                 </div>
             </div>
@@ -29,8 +29,8 @@ export default Index;
 
 if (document.getElementById('index')) {
     ReactDOM.render(
-        <CookiesProvider>
+        <CookiesProvider><BrowserRouter>
             <Index />
-        </CookiesProvider>, document.getElementById('index')
+            </BrowserRouter></CookiesProvider>, document.getElementById('index')
     );
 }

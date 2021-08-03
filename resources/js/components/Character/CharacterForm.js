@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import CharacterService from '../../_services/character-service';
 import TalentMaterialService from '../../_services/talent-material-service';
 
@@ -86,39 +87,40 @@ const CharacterForm = () => {
                         </div>
                         
                         <Form.Label>Vision</Form.Label>
-                        <Form.Select name="vision" value={character.vision} onChange={handleInputChange} >
+                        <Form.Control as="select" name="vision" value={character.vision} onChange={handleInputChange} >
                             <option value="1">Pyro</option>
                             <option value="2">Cryo</option>
                             <option value="3">Hydro</option>
                             <option value="4">Electro</option>
                             <option value="5">Anemo</option>
                             <option value="6">Geo</option>
-                        </Form.Select>
+                        </Form.Control>
                         
                         <Form.Label>Weapon</Form.Label>
-                        <Form.Select name="weapon" value={character.weapon} onChange={handleInputChange} >
+                        <Form.Control as="select" name="weapon" value={character.weapon} onChange={handleInputChange} >
                             <option value="1">Sword</option>
                             <option value="2">Claymore</option>
                             <option value="3">Bow</option>
                             <option value="4">Polearm</option>
                             <option value="5">Catalyst</option>
-                        </Form.Select>
+                        </Form.Control>
 
                         <Form.Label>Talent Material</Form.Label>
-                        <Form.Select name="talentMaterial" value={character.talentMaterial} onChange={handleInputChange} >
+                        <Form.Control as="select" name="talentMaterial" value={character.talentMaterial} onChange={handleInputChange} >
                             {talentMaterials && talentMaterials.map(
                                 talentMaterial => (
                                     <option key={talentMaterial.id} value={talentMaterial.id}>{talentMaterial.name} ( {talentMaterial.schedule.name} ) </option>
                                 )
                             )
                             }
-                        </Form.Select>
+                        </Form.Control>
+
                         <br />
                         <Button type="submit">Submit</Button>
                     </Form.Group>
                 </Form>
             </div>
-            </div>
+        </div>
     )
 }
 
