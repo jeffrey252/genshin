@@ -14,15 +14,11 @@ const Home = () => {
         //AuthenticationService.user();
     })
 
-    AuthenticationService.user()
-        .then(response => {
-            setUser(response.data)
-        });
-
     return (
-        <div className='card'>
-            <div className='card-header'>Welcome, {cookies.auth.user.name}</div>
-            <div className='card-body'>
+        <div className='row justify-content-center'>
+            <div className='col-md-12'>
+            <h2> Welcome, {cookies.auth.user.name} </h2>
+
             </div>
         </div>
     );

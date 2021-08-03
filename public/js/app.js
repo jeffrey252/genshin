@@ -2159,17 +2159,14 @@ var Home = function Home() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {//AuthenticationService.user();
   });
-  _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__.default.user().then(function (response) {
-    setUser(response.data);
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "card",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "card-header",
-      children: ["Welcome, ", cookies.auth.user.name]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "card-body"
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    className: "row justify-content-center",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "col-md-12",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
+        children: [" Welcome, ", cookies.auth.user.name, " "]
+      })
+    })
   });
 };
 
