@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Api\v1\CharacterController;
+use App\Http\Api\v1\TalentMaterialController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,4 +32,11 @@ Route::group([
         Route::get('logout', [AuthController::class, 'logout']);
         Route::get('user', [AuthController::class, 'user']);
     });
+});
+
+Route::group([
+    'middleware' => 'auth:api',
+], function() {
+    Route::resource('talentMaterials', TalentMaterialController::class);
+    Route::resource('characters', CharacterController::class);
 });

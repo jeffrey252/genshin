@@ -6,6 +6,7 @@ import { CookiesProvider } from 'react-cookie';
 import Register from "./Register";
 import Login from './Login';
 import Home from './Home';
+import CharacterContainer from './Character/CharacterContainer';
 
 function Index() {
     return (
@@ -15,6 +16,7 @@ function Index() {
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
                     <Route path="/home" component={Home} />
+                    <Route path="/characters" component={CharacterContainer} />
                 </Router>
                 <div className="col-md-8">
                 </div>
