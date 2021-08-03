@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useCookies } from 'react-cookie';
 import AuthenticationService from '../_services/authentication-service';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
 
@@ -11,7 +12,7 @@ const Login = () => {
     };
 
     const [user, setUser] = useState(initialUserState);
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useCookies(['auth']);
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -20,6 +21,8 @@ const Login = () => {
             [name]: value
         });
     }
+
+    const history = useHistory();
 
     const loginUser = event => {
         event.preventDefault();
@@ -31,10 +34,10 @@ const Login = () => {
 
         AuthenticationService.login(userData)
             .then(response => {
-                console.log(response.data);
-                setCookie('user', response.data, {
+                setCookie('auth', response.data, {
                     path: '/'
                 });
+                history.push('/home');
             });
     }
 
