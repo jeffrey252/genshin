@@ -7,21 +7,36 @@ import TalentMaterialService from '../../_services/talent-material-service';
 
 import { alertService } from '../../_services';
 
+const TalentMaterialForm = ({ history, match }) => {
 
-
-const TalentMaterialForm = () => {
-
+    const { id } = match.params;
+    const isAddMode = !id;
+    
     const initialTalentMaterialState = {
         name: '',
-        scheduleId: '',
+        schedule_id: "",
     };
 
     const [talentMaterial, setTalentMaterial] = useState(initialTalentMaterialState);
     const [schedules, setSchedules] = useState([]);
 
     useEffect(()=> {
+        if(!isAddMode)
+            getTalentMaterial(id);
+            
         getSchedules();
     }, [])
+
+    const getTalentMaterial = id => {
+        TalentMaterialService.get(id)
+        .then(response => {
+            console.log(response.data);
+            setTalentMaterial(response.data)
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    }
 
     const getSchedules = () => {
         ScheduleService.getAll()
@@ -42,15 +57,27 @@ const TalentMaterialForm = () => {
         });
     }
 
-    const history = useHistory();
-
     const saveTalentMaterial = event => {
-        event.preventDefault();
-        var talentMaterialData = {
-            name: talentMaterial.name,
-            schedule_id: talentMaterial.scheduleId,
-        };
-        TalentMaterialService.create(talentMaterialData)
+        event.preventDefault()
+        isAddMode ? addTalentMaterial() : updateTalentMaterial();
+        /*event.preventDefault();
+        TalentMaterialService.create(talentMaterial)
+        .then(response => {
+            console.log(response);
+        })
+
+        alertService.sendAlert(
+            {
+                type: 'success',
+                text: "Talent Material added successfully!",
+            }
+        );
+
+        history.push('/talentMaterials');*/
+    }
+
+    function addTalentMaterial(data) {
+        TalentMaterialService.create(talentMaterial)
         .then(response => {
             console.log(response);
         })
@@ -65,9 +92,25 @@ const TalentMaterialForm = () => {
         history.push('/talentMaterials');
     }
 
+    function updateTalentMaterial(data) {
+        TalentMaterialService.update(talentMaterial)
+        .then(response => {
+            console.log(response);
+        })
+
+        alertService.sendAlert(
+            {
+                type: 'success',
+                text: "Talent Material updated successfully!",
+            }
+        );
+
+        history.push('/talentMaterials');
+    }
+
     return (
         <div className='card'>
-            <div className='card-header'>Create a TalentMaterial</div>
+            <div className='card-header'>{isAddMode ? 'Create Talent Material' : 'Update Talent Material'}</div>
             <div className='card-body'>
 
                 <Form onSubmit={saveTalentMaterial}>
@@ -77,7 +120,7 @@ const TalentMaterialForm = () => {
                         <Form.Control type="text" name="name" value={talentMaterial.name} onChange={handleInputChange} placeholder="Name of Talent Material" /> 
 
                         <Form.Label>Schedule</Form.Label>
-                        <Form.Control as="select" name="scheduleId" value={talentMaterial.scheduleId} onChange={handleInputChange}>
+                        <Form.Control as="select" name="schedule_id" value={talentMaterial.schedule_id} onChange={handleInputChange}>
                             <option value="" disabled>Select schedule</option>
                             {schedules && schedules.map(
                                 schedule => (
@@ -88,7 +131,7 @@ const TalentMaterialForm = () => {
                         </Form.Control>
 
                         <br />
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit">{isAddMode ? 'Create' : 'Update'}</Button>
                     </Form.Group>
                 </Form>
             </div>

@@ -43,6 +43,7 @@ const TalentMaterialContainer = ( {match} ) => {
                 <Switch>
                     <Route exact path={path} component={TalentMaterialList} />
                     <Route path={`${path}/create`} component={TalentMaterialForm} />
+                    <Route path={`${path}/edit/:id`} component={TalentMaterialForm} />
                 </Switch>
                 </div>
             </div>

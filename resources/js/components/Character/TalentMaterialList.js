@@ -13,7 +13,7 @@ const TalentMaterialList = ( {match} ) => {
     const getTalentMaterials = () => {
         TalentMaterialService.getAll()
         .then(response => {
-            setTalentMaterials(response.data.data);
+            setTalentMaterials(response.data);
         })
         .catch(e => {
             console.log(e);
@@ -32,6 +32,7 @@ const TalentMaterialList = ( {match} ) => {
                 <tr>
                     <th>Name</th>
                     <th>Schedule</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,9 @@ const TalentMaterialList = ( {match} ) => {
                     <tr key = {talentMaterial.id}>
                         <td>{talentMaterial.name}</td>
                         <td>{talentMaterial.schedule.name}</td>
+                        <td>
+                            <Button href={`${path}/edit/${talentMaterial.id}`} variant="dark">Edit</Button>
+                        </td>
                     </tr>
                 )
                 )}

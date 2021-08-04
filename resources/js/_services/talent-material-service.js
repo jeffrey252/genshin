@@ -10,6 +10,14 @@ const getAll = () => {
     });
 }
 
+const get = id => {
+    const auth = CookiesService.getAuthAccess();
+    return http.get("/talentMaterials/"+id, {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    });
+}
 const create = data => {
     const auth = CookiesService.getAuthAccess();
     return http.post('/talentMaterials', data, {
@@ -19,7 +27,17 @@ const create = data => {
     });
 }
 
+const update = data => {
+    const auth = CookiesService.getAuthAccess();
+    return http.put('/talentMaterials/'+data.id, data, {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    });
+}
 export default {
+    get,
     getAll,
-    create
+    create,
+    update,
 };
