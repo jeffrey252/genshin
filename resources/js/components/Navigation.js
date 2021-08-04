@@ -4,8 +4,9 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 const Navigation = () => {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" expand="lg">
             <Container>
+                <Nav className="container-fluid">
                 <Navbar.Brand href="#home">Genshin Site</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -18,7 +19,11 @@ const Navigation = () => {
                     <NavDropdown.Item href="#talentMaterials">Manage Talent Materials</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
+                <Nav.Item className="ml-auto">
+                    <Nav.Link>Logout</Nav.Link>
+                </Nav.Item>
                 </Navbar.Collapse>
+                </Nav>
             </Container>
         </Navbar>
     );
