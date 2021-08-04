@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
+import Navigation from "./Navigation";
 
 import Register from "./Register";
 import Login from './Login';
@@ -11,6 +12,8 @@ import CharacterContainer from './Character/CharacterContainer';
 function Index() {
     return (
         <div className="container">
+        <Navigation />
+
             <div className="row justify-content-center">
                 <Switch>
                     <Route path="/register" component={Register} />
