@@ -3,16 +3,7 @@ import CookiesService from './cookie-service';
 
 const getAll = () => {
     const auth = CookiesService.getAuthAccess();
-    return http.get("/talentMaterials", {
-        headers: {
-            Authorization: auth.token_type + ' ' + auth.access_token
-        }
-    });
-}
-
-const create = data => {
-    const auth = CookiesService.getAuthAccess();
-    return http.post('/talentMaterials', data, {
+    return http.get("/schedules", {
         headers: {
             Authorization: auth.token_type + ' ' + auth.access_token
         }
@@ -21,5 +12,4 @@ const create = data => {
 
 export default {
     getAll,
-    create
 };

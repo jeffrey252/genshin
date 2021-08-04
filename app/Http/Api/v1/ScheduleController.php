@@ -5,13 +5,11 @@ namespace App\Http\Api\v1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\TalentMaterial;
 use App\Models\Schedule;
+use App\Http\Resources\Collections\ScheduleCollection;
+use App\Http\Resources\Schedule as ScheduleResource;
 
-use App\Http\Resources\Collections\TalentMaterialCollection;
-use App\Http\Resources\TalentMaterial as TalentMaterialResource;
-
-class TalentMaterialController extends Controller
+class ScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +18,7 @@ class TalentMaterialController extends Controller
      */
     public function index()
     {
-        return new TalentMaterialCollection(TalentMaterial::with('schedule')->get());
+        return new ScheduleCollection(Schedule::all());
     }
 
     /**
@@ -29,11 +27,8 @@ class TalentMaterialController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        $talentMaterial = new TalentMaterial($request->all());
-        $talentMaterial->save();
-        return new TalentMaterialResource($talentMaterial);
-        //return view ('talent_materials.create', ['talentMaterial' => new TalentMaterial, 'schedules' => Schedule::all()]); 
+    {
+        //
     }
 
     /**
@@ -44,15 +39,7 @@ class TalentMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'schedule_id' => 'required',
-        ]);
-
-        TalentMaterial::create($request->all());
-     
-        return redirect()->route('talentMaterials.index')
-                        ->with('success','Post created successfully.');
+        //
     }
 
     /**

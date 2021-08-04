@@ -25,6 +25,9 @@ const CharacterList = () => {
             <div className='card-header'>All Characters</div>
             <div className='card-body'>
             <Button href="/characters/create/" variant="outline-primary">Create Character</Button>
+            &nbsp; <Button href="/characters/talentMaterials/" variant="outline-primary">Manage Talent Materials</Button>
+            <br />
+            <br />
             <table className='table'>
                 <thead>
                 <tr>

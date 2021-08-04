@@ -8,6 +8,7 @@ import Register from "./Register";
 import Login from './Login';
 import Home from './Home';
 import CharacterContainer from './Character/CharacterContainer';
+import TalentMaterialContainer from './Character/TalentMaterialContainer';
 
 function Index() {
     return (
@@ -20,6 +21,8 @@ function Index() {
                     <Route path="/login" component={Login} />
                     <Route path="/home" component={Home} />
                     <Route path="/characters" component={CharacterContainer} />
+                    <Route path="/talentMaterials" component={TalentMaterialContainer} />
+
                 </Switch>
                 <div className="col-md-8">
                 </div>

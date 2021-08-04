@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CharacterList from './CharacterList'
-import CharacterForm from './CharacterForm'
+import TalentMaterialList from './TalentMaterialList'
+import TalentMaterialForm from './TalentMaterialForm'
 import { alertService } from '../../_services';
 import { Alert } from 'react-bootstrap';
-import TalentMaterialContainer from './TalentMaterialContainer';
 
-const CharacterContainer = ( {match} ) => {
+const TalentMaterialContainer = ( {match} ) => {
     const { path } = match;
 
     const [ alertMessage, setAlertMessage] = useState([]);
@@ -30,7 +29,7 @@ const CharacterContainer = ( {match} ) => {
         <div className='container py-4'>
             <div className='row justify-content-center'>
                 <div className='col-md-12'>
-                <h2> Manage Characters </h2>
+                <h2> Manage Talent Materials </h2>
 
                 { alertMessage.map((message, index) =>
                 <Alert variant={message.type} key={index}>
@@ -42,8 +41,8 @@ const CharacterContainer = ( {match} ) => {
             }
             
                 <Switch>
-                    <Route exact path={path} component={CharacterList} />
-                    <Route path={`${path}/create`} component={CharacterForm} />
+                    <Route exact path={path} component={TalentMaterialList} />
+                    <Route path={`${path}/create`} component={TalentMaterialForm} />
                 </Switch>
                 </div>
             </div>
@@ -51,4 +50,4 @@ const CharacterContainer = ( {match} ) => {
     );
 }
 
-export default CharacterContainer;
+export default TalentMaterialContainer;

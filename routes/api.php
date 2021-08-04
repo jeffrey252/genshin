@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Api\v1\CharacterController;
 use App\Http\Api\v1\TalentMaterialController;
+use App\Http\Api\v1\ScheduleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +40,5 @@ Route::group([
 ], function() {
     Route::resource('talentMaterials', TalentMaterialController::class);
     Route::resource('characters', CharacterController::class);
+    Route::resource('schedules', ScheduleController::class);
 });

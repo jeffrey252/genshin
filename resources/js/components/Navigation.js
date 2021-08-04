@@ -16,7 +16,7 @@ const Navigation = () => {
                     <NavDropdown.Item href="/characters">Manage</NavDropdown.Item>
                     <NavDropdown.Item href="/characters/create">Create</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#talentMaterials">Manage Talent Materials</NavDropdown.Item>
+                    <NavDropdown.Item href="/talentMaterials">Manage Talent Materials</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav.Item className="ml-auto">
