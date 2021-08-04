@@ -2092,13 +2092,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _http_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../http-common */ "./resources/js/http-common.js");
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+/* harmony import */ var _cookie_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cookie-service */ "./resources/js/_services/cookie-service.js");
 
 
 
 var getAll = function getAll() {
-  var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_1__.default();
-  var auth = cookies.get('auth');
+  var auth = _cookie_service__WEBPACK_IMPORTED_MODULE_1__.default.getAuthAccess();
   return _http_common__WEBPACK_IMPORTED_MODULE_0__.default.get("/characters", {
     headers: {
       Authorization: auth.token_type + ' ' + auth.access_token
@@ -2107,12 +2106,42 @@ var getAll = function getAll() {
 };
 
 var create = function create(data) {
-  return _http_common__WEBPACK_IMPORTED_MODULE_0__.default.post('/characters', data);
+  var auth = _cookie_service__WEBPACK_IMPORTED_MODULE_1__.default.getAuthAccess();
+  return _http_common__WEBPACK_IMPORTED_MODULE_0__.default.post('/characters', data, {
+    headers: {
+      Authorization: auth.token_type + ' ' + auth.access_token
+    }
+  });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   getAll: getAll,
   create: create
+});
+
+/***/ }),
+
+/***/ "./resources/js/_services/cookie-service.js":
+/*!**************************************************!*\
+  !*** ./resources/js/_services/cookie-service.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+
+
+var getAuthAccess = function getAuthAccess() {
+  var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_0__.default();
+  return cookies.get('auth');
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  getAuthAccess: getAuthAccess
 });
 
 /***/ }),
@@ -2130,6 +2159,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./authentication-service */ "./resources/js/_services/authentication-service.js");
 /* harmony import */ var _alert_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alert-service */ "./resources/js/_services/alert-service.js");
+/* harmony import */ var _cookie_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cookie-service */ "./resources/js/_services/cookie-service.js");
+
 
 
 
@@ -2147,13 +2178,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _http_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../http-common */ "./resources/js/http-common.js");
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+/* harmony import */ var _cookie_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cookie-service */ "./resources/js/_services/cookie-service.js");
 
 
 
 var getAll = function getAll() {
-  var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_1__.default();
-  var auth = cookies.get('auth');
+  var auth = _cookie_service__WEBPACK_IMPORTED_MODULE_1__.default.getAuthAccess();
   return _http_common__WEBPACK_IMPORTED_MODULE_0__.default.get("/talentMaterials", {
     headers: {
       Authorization: auth.token_type + ' ' + auth.access_token
@@ -2439,7 +2469,7 @@ var CharacterForm = function CharacterForm() {
       type: 'success',
       text: "Character added successfully!"
     });
-    history.push('/character');
+    history.push('/characters');
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {

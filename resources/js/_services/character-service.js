@@ -1,10 +1,9 @@
 import http from "../http-common";
-import Cookies from 'universal-cookie';
+import CookiesService from './cookie-service';
 
 
 const getAll = () => {
-    const cookies = new Cookies();
-    const auth = cookies.get('auth');
+    const auth = CookiesService.getAuthAccess();
     return http.get("/characters", {
         headers: {
             Authorization: auth.token_type + ' ' + auth.access_token
@@ -13,7 +12,12 @@ const getAll = () => {
 }
 
 const create = data => {
-    return http.post('/characters', data);
+    const auth = CookiesService.getAuthAccess();
+    return http.post('/characters', data, {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    });
 }
 
 export default {

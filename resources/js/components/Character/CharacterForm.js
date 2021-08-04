@@ -67,7 +67,7 @@ const CharacterForm = () => {
             }
         );
 
-        history.push('/character');
+        history.push('/characters');
     }
 
     return (
