@@ -35,9 +35,19 @@ const update = data => {
         }
     });
 }
+
+const destroy = id => {
+    const auth = CookiesService.getAuthAccess();
+    return http.delete('/talentMaterials/'+id, {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    });
+}
 export default {
     get,
     getAll,
     create,
     update,
+    destroy,
 };

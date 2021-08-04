@@ -91,6 +91,8 @@ class TalentMaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TalentMaterial::findOrFail($id)->delete();
+
+        return response()->json(null, 204);
     }
 }
