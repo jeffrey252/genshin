@@ -75,12 +75,10 @@ class TalentMaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $talentMaterial = TalentMaterial::findOrFail($id);
         $talentMaterial->fill($request->all());
         $talentMaterial->save();
         return new TalentMaterialResource($talentMaterial);
-
     }
 
     /**

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import AuthenticationService from '../_services/authentication-service';
 import { useHistory } from 'react-router-dom';
@@ -35,11 +35,9 @@ const Login = () => {
             .then(response => {
                 const cookies = new Cookies();
                 cookies.set('auth', response.data, { path: '/'});
-                console.log(cookies.get('auth'));
                 history.push('/home');
             });
     }
-
 
     return (
         <div className='card'>

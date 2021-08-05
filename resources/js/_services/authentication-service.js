@@ -1,5 +1,5 @@
 import http from "../http-common";
-import { useCookies } from 'react-cookie';
+import CookiesService from './cookie-service';
 
 const register = data => {
     return http.post('/auth/signup', data);
@@ -7,6 +7,15 @@ const register = data => {
 
 const login = data => {
     return http.post('/auth/login', data);
+}
+
+const logout = () => {
+    const auth = CookiesService.getAuthAccess();
+    return http.get('/auth/logout', {
+        headers: {
+            Authorization: auth.token_type + ' ' + auth.access_token
+        }
+    })
 }
 
 const user = () => {
@@ -21,5 +30,6 @@ const user = () => {
 export default {
     register,
     login,
-    user
+    user,
+    logout,
 };
