@@ -7,6 +7,7 @@ const TalentMaterialList = ( {match} ) => {
     const { path } = match;
     const [talentMaterials, setTalentMaterials] = useState([]);
     const [talentMaterialId, setTalentMaterialId] = useState('');
+    const [requestData, setRequestData] = useState(new Date());
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
@@ -18,7 +19,7 @@ const TalentMaterialList = ( {match} ) => {
 
     useEffect(() => {
       getTalentMaterials();
-    }, []);
+    }, [requestData]);
 
     const getTalentMaterials = () => {
         TalentMaterialService.getAll()
@@ -34,8 +35,8 @@ const TalentMaterialList = ( {match} ) => {
         TalentMaterialService.destroy(talentMaterialId)
         .then(response => {
             //setTalentMaterials(response.data);
-            console.log(response);
             handleCloseDeleteModal();
+            setRequestData(new Date());
         })
         .catch(e => {
             console.log(e);
@@ -44,7 +45,7 @@ const TalentMaterialList = ( {match} ) => {
     }
 
     return (
-        <>
+        <div>
             <div className='card'>
                 <div className='card-header'>All TalentMaterials</div>
                 <div className='card-body'>
@@ -91,7 +92,7 @@ const TalentMaterialList = ( {match} ) => {
             </Button>
             </Modal.Footer>
         </Modal>
-        </>
+        </div>
     );
 }
 

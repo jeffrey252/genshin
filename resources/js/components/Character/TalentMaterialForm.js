@@ -60,52 +60,35 @@ const TalentMaterialForm = ({ history, match }) => {
     const saveTalentMaterial = event => {
         event.preventDefault()
         isAddMode ? addTalentMaterial() : updateTalentMaterial();
-        /*event.preventDefault();
-        TalentMaterialService.create(talentMaterial)
-        .then(response => {
-            console.log(response);
-        })
-
-        alertService.sendAlert(
-            {
-                type: 'success',
-                text: "Talent Material added successfully!",
-            }
-        );
-
-        history.push('/talentMaterials');*/
     }
 
     function addTalentMaterial(data) {
         TalentMaterialService.create(talentMaterial)
         .then(response => {
-            console.log(response);
+            alertService.sendAlert(
+                {
+                    type: 'success',
+                    text: "Talent Material added successfully!",
+                }
+            );
+    
+            history.push('/talentMaterials');
         })
-
-        alertService.sendAlert(
-            {
-                type: 'success',
-                text: "Talent Material added successfully!",
-            }
-        );
-
-        history.push('/talentMaterials');
     }
 
     function updateTalentMaterial(data) {
         TalentMaterialService.update(talentMaterial)
         .then(response => {
-            console.log(response);
+            alertService.sendAlert(
+                {
+                    type: 'success',
+                    text: "Talent Material updated successfully!",
+                }
+            );
+
+            history.push('/talentMaterials');
         })
 
-        alertService.sendAlert(
-            {
-                type: 'success',
-                text: "Talent Material updated successfully!",
-            }
-        );
-
-        history.push('/talentMaterials');
     }
 
     return (
