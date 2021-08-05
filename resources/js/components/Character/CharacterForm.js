@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
+import { Button, Form, ButtonGroup } from 'react-bootstrap';
 import CharacterService from '../../_services/character-service';
 import TalentMaterialService from '../../_services/talent-material-service';
 
 import { alertService } from '../../_services';
 
+const CharacterForm = ({ history, match }) => {
 
-
-const CharacterForm = () => {
+    const { id } = match.params;
+    const isAddMode = !id;
 
     const initialCharacterState = {
-        name: '',
+        name: "",
+        rarity: '',
         vision: '',
         weapon: '',
-        rarity: '',
-        talentMaterial: '',
+        talent_material_id: '',
     };
 
     const [character, setCharacter] = useState(initialCharacterState);
     const [talentMaterials, setTalentMaterials] = useState([]);
 
     useEffect(()=> {
+        if(!isAddMode)
+            getCharacter(id);
+
         getTalentMaterials();
     }, [])
+
+    const getCharacter = id => {
+        CharacterService.get(id)
+        .then(response => {
+            setCharacter(response.data)
+            console.log(response.data);
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    }
 
     const getTalentMaterials = () => {
         TalentMaterialService.getAll()
             .then(response => {
-                setTalentMaterials(response.data.data)
+                setTalentMaterials(response.data)
             })
             .catch(e => {
                 console.log(e);
@@ -44,30 +57,35 @@ const CharacterForm = () => {
         });
     }
 
-    const history = useHistory();
-
     const saveCharacter = event => {
         event.preventDefault();
-        var characterData = {
-            name: character.name,
-            rarity: character.rarity,
-            vision: character.vision,
-            weapon: character.weapon,
-            talent_material_id: character.talentMaterial
-        };
-        CharacterService.create(characterData)
+        isAddMode ? addCharacter() : updateCharacter()
+    }
+
+    function addCharacter() {
+        CharacterService.create(character)
         .then(response => {
-            console.log(response);
+            alertService.sendAlert(
+                {
+                    type: 'success',
+                    text: "Character added successfully!",
+                }
+            );
+            history.push('/characters');
         })
+    }
 
-        alertService.sendAlert(
-            {
-                type: 'success',
-                text: "Character added successfully!",
-            }
-        );
-
-        history.push('/characters');
+    function updateCharacter() {
+        CharacterService.update(character)
+        .then(response => {
+            alertService.sendAlert(
+                {
+                    type: 'success',
+                    text: "Character updated successfully!",
+                }
+            );
+            history.push('/characters');
+        })
     }
 
     return (
@@ -82,12 +100,13 @@ const CharacterForm = () => {
                         <Form.Control type="text" name="name" value={character.name} onChange={handleInputChange} placeholder="Name of character" /> 
                         <Form.Label>Rarity</Form.Label>
                         <div className="mb-3">
-                            <Form.Check name="rarity" value="5" inline onChange={handleInputChange} type="radio" label="Five"/>
-                            <Form.Check name="rarity" value="4" inline onChange={handleInputChange} type="radio" label="Four" />
+                            <Form.Check name="rarity" value="5" inline onChange={handleInputChange} type="radio" checked={character.rarity == 5} label="Five"/>
+                            <Form.Check name="rarity" value="4" inline onChange={handleInputChange} type="radio" checked={character.rarity == 4} label="Four" />
                         </div>
                         
-                        <Form.Label>Vision</Form.Label>
+                        <Form.Label>Vision/Element</Form.Label>
                         <Form.Control as="select" name="vision" value={character.vision} onChange={handleInputChange} >
+                            <option value="" disabled>Select Vision/Element</option>
                             <option value="1">Pyro</option>
                             <option value="2">Cryo</option>
                             <option value="3">Hydro</option>
@@ -98,6 +117,7 @@ const CharacterForm = () => {
                         
                         <Form.Label>Weapon</Form.Label>
                         <Form.Control as="select" name="weapon" value={character.weapon} onChange={handleInputChange} >
+                            <option value="" disabled>Select weapon</option>
                             <option value="1">Sword</option>
                             <option value="2">Claymore</option>
                             <option value="3">Bow</option>
@@ -106,7 +126,8 @@ const CharacterForm = () => {
                         </Form.Control>
 
                         <Form.Label>Talent Material</Form.Label>
-                        <Form.Control as="select" name="talentMaterial" value={character.talentMaterial} onChange={handleInputChange} >
+                        <Form.Control as="select" name="talent_material_id" value={character.talent_material_id} onChange={handleInputChange} >
+                            <option value="" disabled>Select talent material</option>
                             {talentMaterials && talentMaterials.map(
                                 talentMaterial => (
                                     <option key={talentMaterial.id} value={talentMaterial.id}>{talentMaterial.name} ( {talentMaterial.schedule.name} ) </option>
@@ -116,7 +137,7 @@ const CharacterForm = () => {
                         </Form.Control>
 
                         <br />
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit">{isAddMode ? 'Submit' : 'Update'}</Button>
                     </Form.Group>
                 </Form>
             </div>

@@ -44,6 +44,8 @@ const CharacterContainer = ( {match} ) => {
                 <Switch>
                     <Route exact path={path} component={CharacterList} />
                     <Route path={`${path}/create`} component={CharacterForm} />
+                    <Route path={`${path}/edit/:id`} component={CharacterForm} />
+
                 </Switch>
                 </div>
             </div>

@@ -45,7 +45,7 @@ class CharacterController extends Controller
     public function show($id)
     {
         $character = Character::where('id', $id)->with('talentMaterial.schedule')->firstOrFail();
-        return new CharacterResource($character->transformForApi());
+        return new CharacterResource($character);
         
     }
 
@@ -58,7 +58,10 @@ class CharacterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $character = Character::findOrFail($id);
+        $character->fill($request->all());
+        $character->save();
+        return new CharacterResource($character);
     }
 
     /**
@@ -69,6 +72,8 @@ class CharacterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Character::findOrFail($id)->delete();
+
+        return response()->json(null, 204);
     }
 }

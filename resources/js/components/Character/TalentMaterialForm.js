@@ -30,7 +30,6 @@ const TalentMaterialForm = ({ history, match }) => {
     const getTalentMaterial = id => {
         TalentMaterialService.get(id)
         .then(response => {
-            console.log(response.data);
             setTalentMaterial(response.data)
         })
         .catch(e => {

@@ -18,6 +18,7 @@ const get = id => {
         }
     });
 }
+
 const create = data => {
     const auth = CookiesService.getAuthAccess();
     return http.post('/talentMaterials', data, {

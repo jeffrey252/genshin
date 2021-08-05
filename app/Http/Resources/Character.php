@@ -6,6 +6,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Character extends JsonResource
 {
+
+    public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -14,6 +17,13 @@ class Character extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'rarity' => $this->rarity,
+            'vision' => $this->vision,
+            'weapon' => $this->weapon,
+            'talent_material_id' => $this->talent_material_id,
+        ];
     }
 }

@@ -21,8 +21,6 @@ class CharacterCollection extends ResourceCollection
             $character->vision = $character->getVisionLabel();
         });
 
-        return [
-            'data' => $this->collection,
-        ];
+        return $this->collection;
     }
 }
