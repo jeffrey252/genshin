@@ -41,7 +41,7 @@ const Navigation = () => {
                 
                 <Nav.Item className="ml-auto">
                     {
-                        cookies.get('auth') ? <Nav.Link onClick={logout}>Log Out</Nav.Link> : <Nav.Link href="/login">Log In</Nav.Link>
+                        cookies.get('auth') ? <Nav.Link onClick={logout}>Log Out</Nav.Link> : ''
                     }
                 </Nav.Item>
                 </Navbar.Collapse>

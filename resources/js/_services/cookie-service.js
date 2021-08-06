@@ -10,7 +10,13 @@ const logout = () => {
     cookies.remove('auth');
 }
 
+const isLoggedIn = () => {
+    const cookies = new Cookies();
+    return cookies.get('auth') !== undefined;
+}
+
 export default {
     getAuthAccess,
     logout,
+    isLoggedIn,
 }

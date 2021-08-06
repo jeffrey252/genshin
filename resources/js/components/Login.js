@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import AuthenticationService from '../_services/authentication-service';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import Navigation from "./Navigation";
 
 const Login = () => {
 
@@ -35,28 +36,34 @@ const Login = () => {
             .then(response => {
                 const cookies = new Cookies();
                 cookies.set('auth', response.data, { path: '/'});
-                history.push('/home');
+                history.push('/');
             });
     }
 
     return (
-        <div className='card'>
-            <div className='card-header'>Login</div>
-            <div className='card-body'>
-                <Form onSubmit={loginUser}>
-                    <Form.Group className="mb-3" controlId="register.ControlInput1">
-                        
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} placeholder="Email" /> 
+        <div className="container">
+            <Navigation />
+            <br />
+                <div className='card'>
+                    <div className='card-header'>Login</div>
+                    <div className='card-body'>
+                        <Form onSubmit={loginUser}>
+                            <Form.Group className="mb-3" controlId="register.ControlInput1">
+                                
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} placeholder="Email" /> 
 
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" value={user.password} onChange={handleInputChange} placeholder="Password" /> 
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" name="password" value={user.password} onChange={handleInputChange} placeholder="Password" /> 
 
-                        <Button type="submit">Log In</Button>
-                    </Form.Group>
-                </Form>
-            </div>
+                                <br />
+                                <Button type="submit">Log In</Button>
+                            </Form.Group>
+                        </Form>
+                    </div>
+                </div>
         </div>
+        
     );
 }
 

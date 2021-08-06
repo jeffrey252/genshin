@@ -4,7 +4,6 @@ import CharacterList from './CharacterList'
 import CharacterForm from './CharacterForm'
 import { alertService } from '../../_services';
 import { Alert } from 'react-bootstrap';
-import TalentMaterialContainer from './TalentMaterialContainer';
 
 const CharacterContainer = ( {match} ) => {
     const { path } = match;
@@ -40,12 +39,10 @@ const CharacterContainer = ( {match} ) => {
                 </Alert>
             )
             }
-            
                 <Switch>
                     <Route exact path={path} component={CharacterList} />
                     <Route path={`${path}/create`} component={CharacterForm} />
                     <Route path={`${path}/edit/:id`} component={CharacterForm} />
-
                 </Switch>
                 </div>
             </div>
