@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAccountTypeToUsersTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddAccountTypeToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('account_type')->after('email')->default('2');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->primary(['user_id', 'role']);
+            $table->integer('user_id')->unsigned();
+            $table->string('role');
         });
     }
 
@@ -25,8 +27,6 @@ class AddAccountTypeToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('roles');
     }
 }

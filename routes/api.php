@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'prefix' => 'auth'
+    'prefix' => 'auth',
 ], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('signup', [AuthController::class, 'signup']);
@@ -36,7 +36,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth:api',
+    'middleware' => (['auth:api', 'role'])
 ], function() {
     Route::resource('talentMaterials', TalentMaterialController::class);
     Route::resource('characters', CharacterController::class);

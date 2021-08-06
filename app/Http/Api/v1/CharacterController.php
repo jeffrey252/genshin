@@ -12,11 +12,18 @@ use App\Http\Resources\Character as CharacterResource;
 
 class CharacterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['scope:admin'])->except('index');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         return new CharacterCollection(Character::with('talentMaterial.schedule')->get());
@@ -46,7 +53,6 @@ class CharacterController extends Controller
     {
         $character = Character::where('id', $id)->with('talentMaterial.schedule')->firstOrFail();
         return new CharacterResource($character);
-        
     }
 
     /**
