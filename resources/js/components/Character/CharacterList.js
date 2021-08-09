@@ -15,7 +15,6 @@ const CharacterList = ({ match }) => {
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
     
     useEffect(() => {
-        console.log(CookieService.getAuthAccess());
       getCharacters();
     }, [requestData]);
 

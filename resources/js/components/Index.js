@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch } from "react-router-dom";
 
@@ -7,15 +7,17 @@ import PrivateRoute from './PrivateRoute';
 
 import Register from "./Register";
 import Login from './Login';
-import Home from './Home';
+
+import LayoutService from "../_services/layout-service";
 
 
 function Index() {
+
     return (
         <Switch>
             <AuthRoute path="/register" component={Register} />
             <AuthRoute path="/login" component={Login} />
-            <PrivateRoute path="/" component={Home} />
+            <PrivateRoute path="/" component={LayoutService.dashboard()} />
         </Switch>
     );
 }
