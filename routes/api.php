@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Api\v1\CharacterController;
 use App\Http\Api\v1\TalentMaterialController;
 use App\Http\Api\v1\ScheduleController;
+use App\Http\Api\v1\PlayerCharacterController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,4 +43,5 @@ Route::group([
     Route::resource('talentMaterials', TalentMaterialController::class);
     Route::resource('characters', CharacterController::class);
     Route::resource('schedules', ScheduleController::class);
+    Route::resource('playerCharacters', PlayerCharacterController::class);
 });

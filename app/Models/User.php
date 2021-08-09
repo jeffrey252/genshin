@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Role;
 
@@ -46,5 +47,15 @@ class User extends Authenticatable
 
     public function role() {
         return $this->hasOne(Role::class);
+    }
+
+    public function getCharacterRoster()
+    {
+        return DB::table('player_characters')
+                ->join('characters', function($join) {
+                    $join->on('player_characters.character_id', '=', 'characters.id')
+                        ->where('user_id', '=', $this->id);
+                })
+                ->get();
     }
 }

@@ -46,10 +46,16 @@ const destroy = id => {
     });
 }
 
+const addCharacterToPlayer = characterId => {
+    let auth = CookiesService.getAuthAccess();
+    console.log(auth.user.id, characterId )
+}
+
 export default {
     get,
     getAll,
     create,
     update,
     destroy,
+    addCharacterToPlayer
 };
