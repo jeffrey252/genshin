@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import CharacterService from '../../_services/character-service'; 
+import CookieService from '../../_services/cookie-service';
 
 const CharacterList = ({ match }) => {
 
@@ -14,6 +15,7 @@ const CharacterList = ({ match }) => {
     const handleCloseDeleteModal = () => setShowDeleteModal(false);
     
     useEffect(() => {
+        console.log(CookieService.getAuthAccess());
       getCharacters();
     }, [requestData]);
 

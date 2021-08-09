@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAccountTypeToUsersTable extends Migration
+class UserRoleTrigger extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddAccountTypeToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('account_type')->after('email')->default('2');
-        });
+        DB::unprepared('
+        CREATE TRIGGER tr_User_Role AFTER INSERT ON `users` FOR EACH ROW
+            BEGIN
+                INSERT INTO roles (`user_id`, `role`) 
+                VALUES (NEW.id, "player");
+            END
+        ');
     }
 
     /**
@@ -25,8 +29,6 @@ class AddAccountTypeToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        DB::unprepared('DROP TRIGGER `tr_User_Role`');
     }
 }

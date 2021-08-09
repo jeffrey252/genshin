@@ -15,8 +15,20 @@ const isLoggedIn = () => {
     return cookies.get('auth') !== undefined;
 }
 
+const isPlayer = () => {
+    const cookies = new Cookies();
+    return cookies.get('auth').role == 'player';
+}
+
+const userType = () => {
+    const cookies = new Cookies();
+    return cookies.get('auth') !== undefined ? cookies.get('auth').role : 'unauthenticated';
+}
+
 export default {
     getAuthAccess,
     logout,
     isLoggedIn,
+    isPlayer,
+    userType,
 }

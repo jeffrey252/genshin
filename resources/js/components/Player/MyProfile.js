@@ -3,10 +3,7 @@ import { Switch } from "react-router-dom";
 
 import { useCookies } from 'react-cookie';
 import Navigation from "./Navigation";
-import CharacterContainer from './Character/CharacterContainer';
-import TalentMaterialContainer from './Character/TalentMaterialContainer';
 import PrivateRoute from './PrivateRoute';
-import LayoutService from "../_services/layout-service";
 
 const Home = ( { match }) => {
 
@@ -15,9 +12,7 @@ const Home = ( { match }) => {
 
     return (
         <div className="container">
-            {
-                React.createElement(LayoutService.navBar())
-            }
+            <Navigation />
             <br />
             <div className="row justify-content-center">
                 <div className='col-md-12'>

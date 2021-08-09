@@ -22,11 +22,16 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed'
-        ]);        $user = new User([
+        ]);
+        $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
-        ]);        $user->save();        return response()->json([
+        ]);
+        
+        $user->save();
+        
+        return response()->json([
             'message' => 'Successfully created user!'
         ], 201);
     }
@@ -56,7 +61,11 @@ class AuthController extends Controller
             ], 401);
             
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
+        $userRole = $user->role()->first();
+        
+        $this->scope = $userRole ? $userRole->role : 'player';
+
+        $tokenResult = $user->createToken($user->email.'-'.now(), [$this->scope]);
         $token = $tokenResult->token;
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
@@ -65,6 +74,7 @@ class AuthController extends Controller
         return response()->json([
         'user' => $user,
         'access_token' => $tokenResult->accessToken,
+        'role' => $this->scope,
         'token_type' => 'Bearer',
         'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString()
         ]);
