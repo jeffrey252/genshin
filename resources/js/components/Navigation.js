@@ -3,12 +3,10 @@ import { useHistory } from "react-router";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import AuthenticationService from '../_services/authentication-service';
 import CookiesService from "../_services/cookie-service";
-import Cookies from 'universal-cookie';
 
 const Navigation = () => {
 
     const history = useHistory();
-    const cookies = new Cookies();
     
     const logout = () => {
         AuthenticationService.logout()
@@ -26,7 +24,7 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 {
-                    cookies.get('auth') ? (
+                    CookiesService.getAuthAccess() ? (
                         <Nav className="me-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <NavDropdown title="Characters" id="basic-nav-dropdown">
@@ -41,7 +39,7 @@ const Navigation = () => {
                 
                 <Nav.Item className="ml-auto">
                     {
-                        cookies.get('auth') ? <Nav.Link onClick={logout}>Log Out</Nav.Link> : ''
+                        CookiesService.getAuthAccess() ? <Nav.Link onClick={logout}>Log Out</Nav.Link> : ''
                     }
                 </Nav.Item>
                 </Navbar.Collapse>

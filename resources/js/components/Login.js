@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import AuthenticationService from '../_services/authentication-service';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Navigation from "./Navigation";
+import LayoutService from "../_services/layout-service";
 
 const Login = () => {
 
@@ -42,7 +42,9 @@ const Login = () => {
 
     return (
         <div className="container">
-            <Navigation />
+            {
+                React.createElement(LayoutService.navBar())    
+            }
             <br />
                 <div className='card'>
                     <div className='card-header'>Login</div>

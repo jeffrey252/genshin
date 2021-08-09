@@ -17,7 +17,7 @@ class UserRoleTrigger extends Migration
         CREATE TRIGGER tr_User_Role AFTER INSERT ON `users` FOR EACH ROW
             BEGIN
                 INSERT INTO roles (`user_id`, `role`) 
-                VALUES (NEW.id, "basic");
+                VALUES (NEW.id, "player");
             END
         ');
     }

@@ -63,7 +63,7 @@ class AuthController extends Controller
         $user = $request->user();
         $userRole = $user->role()->first();
         
-        $this->scope = $userRole ? $userRole->role : 'basic';
+        $this->scope = $userRole ? $userRole->role : 'player';
 
         $tokenResult = $user->createToken($user->email.'-'.now(), [$this->scope]);
         $token = $tokenResult->token;
