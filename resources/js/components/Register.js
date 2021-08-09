@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 import AuthenticationService from '../_services/authentication-service';
+import Navigation from "./Navigation";
 
 const Register = () => {
 
@@ -40,25 +41,29 @@ const Register = () => {
 
 
     return (
-        <div className='card'>
-            <div className='card-header'>Register</div>
-            <div className='card-body'>
-                <Form onSubmit={registerUser}>
-                    <Form.Group className="mb-3" controlId="register.ControlInput1">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} placeholder="Name" /> 
-                        
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} placeholder="Email" /> 
+        <div className="container">
+            <Navigation />
+            <br />
+            <div className='card'>
+                <div className='card-header'>Register</div>
+                <div className='card-body'>
+                    <Form onSubmit={registerUser}>
+                        <Form.Group className="mb-3" controlId="register.ControlInput1">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" name="name" value={user.name} onChange={handleInputChange} placeholder="Name" /> 
+                            
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" name="email" value={user.email} onChange={handleInputChange} placeholder="Email" /> 
 
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" value={user.password} onChange={handleInputChange} placeholder="Password" /> 
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" name="password" value={user.password} onChange={handleInputChange} placeholder="Password" /> 
 
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" name="passwordConfirmation" value={user.passwordConfirmation} onChange={handleInputChange} placeholder="Confirm Password" /> 
-                        <Button type="submit">Submit</Button>
-                    </Form.Group>
-                </Form>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type="password" name="passwordConfirmation" value={user.passwordConfirmation} onChange={handleInputChange} placeholder="Confirm Password" /> 
+                            <Button type="submit">Submit</Button>
+                        </Form.Group>
+                    </Form>
+                </div>
             </div>
         </div>
     );
