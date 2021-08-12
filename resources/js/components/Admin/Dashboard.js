@@ -2,10 +2,10 @@ import React from "react";
 import { Switch } from "react-router-dom";
 
 import { useCookies } from "react-cookie";
-import CharacterContainer from "./Character/CharacterContainer";
-import TalentMaterialContainer from "./Character/TalentMaterialContainer";
-import PrivateRoute from "./PrivateRoute";
-import LayoutService from "../_services/layout-service";
+import CharacterContainer from "./../Character/CharacterContainer";
+import TalentMaterialContainer from "./../Character/TalentMaterialContainer";
+import PrivateRoute from "./../Routes/PrivateRoute";
+import LayoutService from "../../_services/layout-service";
 
 const Dashboard = ({ match }) => {
   const { path } = match;

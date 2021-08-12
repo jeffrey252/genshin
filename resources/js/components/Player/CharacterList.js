@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import CharacterService from "../../_services/character-service";
 import CookieService from "../../_services/cookie-service";
 import PlayerService from "../../_services/player-service";
@@ -14,6 +14,14 @@ const CharacterList = ({ match }) => {
   const [characters, setCharacters] = useState([]);
   const [playerCharacters, setPlayerCharacters] = useState([]);
   const [characterId, setCharacterId] = useState("");
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+
+  const handleShowDeleteModal = (event) => {
+    setCharacterId(event.target.getAttribute("data-character-id"));
+    setShowDeleteModal(true);
+  };
 
   useEffect(() => {
     getPlayerCharacters();
@@ -77,6 +85,18 @@ const CharacterList = ({ match }) => {
       });
   }
 
+  function deleteCharacter() {
+    let auth = CookieService.getAuthAccess();
+    PlayerService.destroy(auth.user.id, character)
+      .then((response) => {
+        console.log(response.data);
+        setPlayerCharacters(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   return (
     <div>
       <div className="card">
@@ -126,6 +146,21 @@ const CharacterList = ({ match }) => {
           </table>
         </div>
       </div>
+
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Character</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this character?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteCharacter}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

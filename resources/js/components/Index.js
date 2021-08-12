@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch } from "react-router-dom";
 
-import AuthRoute from "./AuthRoute";
-import PrivateRoute from "./PrivateRoute";
+import AuthRoute from "./Routes/AuthRoute";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 import Register from "./Register";
 import Login from "./Login";

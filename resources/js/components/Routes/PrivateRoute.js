@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import CookiesService from "../_services/cookie-service";
+import CookiesService from "../../_services/cookie-service";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

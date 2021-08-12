@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import CharacterList from "./CharacterList";
-import PrivateRoute from "../PrivateRoute";
+import PrivateRoute from "../Routes/PrivateRoute";
 import LayoutService from "../../_services/layout-service";
-import CharacterService from "../../_services/character-service";
 
 const Dashboard = ({ match }) => {
   const { path } = match;
   const [cookies, setCookies] = useCookies(["user"]);
   const [value, setValue] = useState({});
   const [characters, setCharacters] = useState([]);
-
-  useEffect(() => {
-    //getPlayerCharacters();
-  }, []);
-
-  function test() {
-    CharacterService.addCharacterToPlayer(value.id);
-  }
 
   return (
     <div className="container">

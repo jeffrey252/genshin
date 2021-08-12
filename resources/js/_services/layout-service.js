@@ -3,7 +3,7 @@ import CookiesService from "./cookie-service";
 import AdminNavigation from "../components/Layouts/Navigation/AdminNavigation";
 import PlayerNavigation from "../components/Layouts/Navigation/PlayerNavigation";
 import LoggedOutNavigation from "../components/Layouts/LoggedOutNavigation";
-import AdminDashboard from "../components/Dashboard";
+import AdminDashboard from "../components/Admin/Dashboard";
 import PlayerDashboard from "../components/Player/Dashboard";
 
 const navBar = () => {
