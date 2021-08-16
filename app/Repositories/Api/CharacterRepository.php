@@ -4,11 +4,11 @@ namespace App\Repositories\Api;
 
 use App\Models\Character;
 use App\Repositories\Interfaces\CharacterRepositoryInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Repositories\Api\Abstracts\Repository;
 use App\Http\Resources\Character as CharacterResource;
-
+use App\Http\Resources\Collections\CharacterCollection;
+use Illuminate\Support\Facades\DB;
 
 class CharacterRepository extends Repository implements CharacterRepositoryInterface
 {
@@ -23,10 +23,10 @@ class CharacterRepository extends Repository implements CharacterRepositoryInter
     */
    public function all()
    {
-       //return $this->model->all();    
+       return DB::table('characters')->get();
    }
 
-   public function read($id)
+   public function read($id): JsonResource
    {
         return new CharacterResource(Character::find($id));
    }

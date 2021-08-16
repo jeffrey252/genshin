@@ -25,8 +25,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //$this->app->bind(Repository::class, CharacterRepository::class);
-        //$this->app->bind(CharacterRepositoryInterface::class, CharacterRepository::class);
         $this->app->bind(CharacterRepositoryInterface::class, CharacterRepository::class);
     }
 }

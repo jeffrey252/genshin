@@ -24,6 +24,6 @@ abstract class Repository
 
 
     abstract function all();
-    abstract function read($id);
+    abstract function read($id): JsonResource;
 
 }
