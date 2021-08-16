@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Resources\Character as CharacterResource;
+
+
 class Character extends Model
 {
     use HasFactory;
@@ -62,5 +65,10 @@ class Character extends Model
         $this->vision = $this->getVisionLabel();
         $this->weapon = $this->getWeaponLabel();
         return $this;
+    }
+
+    public function toResource()
+    {
+        return new CharacterResource($this);
     }
 }

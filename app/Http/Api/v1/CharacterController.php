@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 use App\Models\Character;
 
 use App\Http\Resources\Collections\CharacterCollection;
-use App\Http\Resources\Character as CharacterResource;
+
+use App\Repositories\Interfaces\CharacterRepositoryInterface;
 
 class CharacterController extends Controller
 {
 
-    public function __construct()
+    private $characterRepository;
+
+    public function __construct(CharacterRepositoryInterface $characterRepository)
     {
         $this->middleware(['scope:admin'])->except('index');
+        $this->characterRepository = $characterRepository;
     }
     
     /**
@@ -26,8 +30,7 @@ class CharacterController extends Controller
     
     public function index()
     {
-        return new CharacterCollection(Character::with('talentMaterial.schedule')->get());
-        //
+        return $this->characterRepository->all();
     }
 
     /**
@@ -51,8 +54,7 @@ class CharacterController extends Controller
      */
     public function show($id)
     {
-        $character = Character::where('id', $id)->with('talentMaterial.schedule')->firstOrFail();
-        return new CharacterResource($character);
+        return $this->characterRepository->read($id);
     }
 
     /**
